@@ -25,11 +25,35 @@ const driveLogoSources = [
   "https://drive.google.com/thumbnail?id=1DOneq1T0Hyi-xtbXrtSlX_ikvLq22Q9X&sz=w1000"
 ];
 
+const driveProfileSources = [
+  "https://drive.google.com/thumbnail?id=1azNy2HYLaQmiWuQNtYc7fQiq4SW1zhDF&sz=w1200",
+  "https://lh3.googleusercontent.com/d/1azNy2HYLaQmiWuQNtYc7fQiq4SW1zhDF=w1200",
+  "https://drive.google.com/uc?export=view&id=1azNy2HYLaQmiWuQNtYc7fQiq4SW1zhDF"
+];
+
 function BrandLogo({ className, alt = "Infinitum" }: { className?: string; alt?: string }) {
   const [sourceIndex, setSourceIndex] = useState(0);
   const [hidden, setHidden] = useState(false);
   if (hidden) return null;
   return <img src={driveLogoSources[sourceIndex]} alt={alt} className={className} loading="eager" onError={() => sourceIndex < driveLogoSources.length - 1 ? setSourceIndex((current) => current + 1) : setHidden(true)} />;
+}
+
+function ProfilePhoto({ alt }: { alt: string }) {
+  const [sourceIndex, setSourceIndex] = useState(0);
+  return (
+    <img
+      src={driveProfileSources[sourceIndex]}
+      alt={alt}
+      className="photo"
+      loading="eager"
+      referrerPolicy="no-referrer"
+      onError={() => {
+        if (sourceIndex < driveProfileSources.length - 1) {
+          setSourceIndex((current) => current + 1);
+        }
+      }}
+    />
+  );
 }
 
 export function DigitalCard({ card }: { card: CardData }) {
@@ -83,7 +107,7 @@ export function DigitalCard({ card }: { card: CardData }) {
             <button className="icon-button" onClick={() => setQrOpen(true)} aria-label="Show QR code"><AppIcon name="qr" /></button>
           </header>
           <div className="profile-grid">
-            <div className="photo-wrap"><img src={card.profileImage} alt={card.name} className="photo" loading="eager" /><span className="status"><i /> Executive Profile</span></div>
+            <div className="photo-wrap"><ProfilePhoto alt={card.name} /><span className="status"><i /> Executive Profile</span></div>
             <div className="identity"><p className="eyebrow">DIGITAL BUSINESS CARD</p><h1>{card.name}</h1><h2>{card.role}</h2><p className="company">{card.company}</p><p className="headline">{card.headline}</p></div>
           </div>
         </section>
