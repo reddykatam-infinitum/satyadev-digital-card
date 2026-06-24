@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { siteUrl } from "@/lib/site-url";
 import "./globals.css";
 
-const profileImage = "/api/profile?v=20260624-drive";
+const profileImage = "https://drive.google.com/thumbnail?id=1azNy2HYLaQmiWuQNtYc7fQiq4SW1zhDF&sz=w1200";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
