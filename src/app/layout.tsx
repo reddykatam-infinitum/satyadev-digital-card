@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { siteUrl } from "@/lib/site-url";
 import "./globals.css";
 
-const profileImage = "/api/profile?v=20260624";
+const profileImage = "/api/profile?v=20260624-drive";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
