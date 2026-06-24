@@ -1,18 +1,39 @@
-const SOURCE_URL = "https://raw.githubusercontent.com/reddykatam-infinitum/vandana-digital-card/main/public/images/satyadev-profile.jpg.b64";
+const DRIVE_FILE_ID = "1azNy2HYLaQmiWuQNtYc7fQiq4SW1zhDF";
+
+const SOURCE_URLS = [
+  `https://lh3.googleusercontent.com/d/${DRIVE_FILE_ID}=w1200`,
+  `https://drive.google.com/uc?export=download&id=${DRIVE_FILE_ID}`,
+  `https://drive.google.com/thumbnail?id=${DRIVE_FILE_ID}&sz=w1200`
+];
 
 export const runtime = "nodejs";
 
 export async function GET() {
-  const response = await fetch(SOURCE_URL, { next: { revalidate: 86400 } });
-  if (!response.ok) return new Response("Profile image unavailable", { status: 502 });
+  for (const sourceUrl of SOURCE_URLS) {
+    try {
+      const response = await fetch(sourceUrl, {
+        redirect: "follow",
+        cache: "no-store",
+        headers: { "User-Agent": "Mozilla/5.0" }
+      });
 
-  const encoded = (await response.text()).trim();
-  const image = Buffer.from(encoded, "base64");
+      if (!response.ok) continue;
 
-  return new Response(image, {
-    headers: {
-      "Content-Type": "image/jpeg",
-      "Cache-Control": "public, max-age=86400, stale-while-revalidate=604800"
+      const contentType = response.headers.get("content-type") || "image/jpeg";
+      if (!contentType.startsWith("image/")) continue;
+
+      const image = await response.arrayBuffer();
+
+      return new Response(image, {
+        headers: {
+          "Content-Type": contentType,
+          "Cache-Control": "public, max-age=300, stale-while-revalidate=3600"
+        }
+      });
+    } catch {
+      // Try the next Google Drive image endpoint.
     }
-  });
+  }
+
+  return new Response("Profile image unavailable", { status: 502 });
 }
