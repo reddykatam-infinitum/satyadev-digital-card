@@ -36,7 +36,7 @@ export const cards: DigitalCard[] = [
     role: "Founder & Director",
     company: "Infinitum Network Solutions",
     headline: "Building global creator ecosystems, original IPs and digital media businesses.",
-    profileImage: "/api/profile?v=20260624",
+    profileImage: "/api/profile?v=20260624-drive",
     phone: "+919905800015",
     phoneDisplay: "+91 99058 00015",
     whatsapp: "919905800015",
