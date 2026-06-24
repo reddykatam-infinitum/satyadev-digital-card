@@ -1,0 +1,10 @@
+{
+  "name": "Satyadev Chada Digital Card",
+  "short_name": "Satyadev Card",
+  "description": "Official digital business card for Satyadev Chada.",
+  "start_url": "/satyadev-chada",
+  "display": "standalone",
+  "background_color": "#020608",
+  "theme_color": "#020608",
+  "icons": [{"src": "/images/infinitum-mark.svg", "sizes": "any", "type": "image/svg+xml"}]
+}
