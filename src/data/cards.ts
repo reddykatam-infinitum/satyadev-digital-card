@@ -33,7 +33,7 @@ export const cards: DigitalCard[] = [
     name: "Satyadev Chada",
     firstName: "Satyadev",
     lastName: "Chada",
-    role: "Founder & Director",
+    role: "Founder",
     company: "Infinitum Network Solutions",
     headline: "Building global creator ecosystems, original IPs and digital media businesses.",
     profileImage: "https://drive.google.com/thumbnail?id=1azNy2HYLaQmiWuQNtYc7fQiq4SW1zhDF&sz=w1200",
